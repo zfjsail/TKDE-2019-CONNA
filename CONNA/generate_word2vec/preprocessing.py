@@ -1,4 +1,5 @@
 from os.path import join
+import os
 import sys
 sys.path.append("..")
 import codecs
@@ -61,6 +62,7 @@ def cal_feature_idf():
     """
     features = data_utils.load_data('Essential_Embeddings/', "pub.features")
     feature_dir = join('Essential_Embeddings/', 'global')
+    os.makedirs(feature_dir, exist_ok=True)
     index = 0
     author_counter = dd(int)
     author_cnt = 0
@@ -171,11 +173,11 @@ if __name__ == '__main__':
     # Processing raw data as follows to generate essential word embeddings.
 
 
-    dump_pub_features_to_file()   # extract features of author name and words from publications
+    # dump_pub_features_to_file()   # extract features of author name and words from publications
     # cal_feature_idf()                # calculate idf for each author name or word
 
-    #3. emb_model = EmbeddingModel.Instance()   
-    #4. emb_model.train()                # train embeddings for author names and words
+    emb_model = EmbeddingModel.Instance()   
+    emb_model.train()                # train embeddings for author names and words
     
     #5. dump_feature_id_to_file()        
     

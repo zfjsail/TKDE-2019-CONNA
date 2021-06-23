@@ -2,6 +2,7 @@ import logging
 import sys
 sys.path.append("..")
 from os.path import join
+import os
 from gensim.models import Word2Vec
 import numpy as np
 import random
@@ -16,7 +17,7 @@ logging.basicConfig(format='%(asctime)s : %(levelname)s : %(message)s', level=lo
 class EmbeddingModel:
 
     def train(self):
-        features = data_utils.load_data('human_labeled_data/', "pub.features")
+        features = data_utils.load_data('Essential_Embeddings/', "pub.features")
         index = 0
         author_data = []
         word_data = []
@@ -39,7 +40,9 @@ class EmbeddingModel:
         self.author_model = Word2Vec(
             author_data, size=settings.EMB_DIM, window=5, min_count=5, workers=20,
         )
-        self.author_model.save(join('Essential_Embeddings/emb/', 'author_name.emb'))
+        out_dir = "Essential_Embeddings/emb/"
+        os.makedirs(out_dir, exist_ok=True)
+        self.author_model.save(join(out_dir, 'author_name.emb'))
         self.word_model = Word2Vec(
             word_data, size=settings.EMB_DIM, window=5, min_count=5, workers=20,
         )
