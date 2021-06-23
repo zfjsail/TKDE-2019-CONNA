@@ -47,7 +47,7 @@ def dump_pub_features_to_file():
     global _pubs_dict
 
     # Load publication features
-    _pubs_dict = data_utils.load_json('./OAG_WhoIsWho_data', 'your_pub_file_name')
+    _pubs_dict = data_utils.load_json('./WhoIsWho_data', 'conna_pub_dict.json')
     res = multithread_utils.processed_by_multi_thread(get_pub_feature, range(len(_pubs_dict)))
     data_utils.dump_data(res, "Essential_Embeddings/", "pub.features")
     # _pubs_dict = data_utils.load_json(settings.GLOBAL_DATA_DIR, 'pubs_raw.json')
@@ -171,8 +171,8 @@ if __name__ == '__main__':
     # Processing raw data as follows to generate essential word embeddings.
 
 
-    #1. dump_pub_features_to_file()   # extract features of author name and words from publications
-    #2. cal_feature_idf()                # calculate idf for each author name or word
+    dump_pub_features_to_file()   # extract features of author name and words from publications
+    # cal_feature_idf()                # calculate idf for each author name or word
 
     #3. emb_model = EmbeddingModel.Instance()   
     #4. emb_model.train()                # train embeddings for author names and words
