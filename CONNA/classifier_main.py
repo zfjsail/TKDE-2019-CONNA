@@ -681,7 +681,8 @@ if __name__ == '__main__':
             if((index+1) % 2 != 1):
                 print("error 1/1 index: ", index)
             vec_num = int(index/2)
-            batch_num = int((vec_num+1) / ins_num)
+            if ins_num != 0:
+                batch_num = int((vec_num+1) / ins_num)
             ins_num = ((vec_num+1) % ins_num)
             if(ins_num == 0):
                 batch_num = batch_num - 1
