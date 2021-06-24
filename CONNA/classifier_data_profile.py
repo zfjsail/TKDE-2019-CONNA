@@ -388,8 +388,9 @@ def _test_gen_pos_and_neg_pair(index, neg_sample):
 
         neg_pairs = (pos_pid, neg_pid)
         
-        neg_str_feature.append([])
-        
+        # neg_str_feature.append([])
+        neg_str_feature.append([0] * 10)
+
 
         person_author_ids, person_word_ids, \
         per_person_author_ids, per_person_word_ids, \
@@ -421,7 +422,8 @@ def _test_gen_pos_and_neg_pair(index, neg_sample):
     pos_person_paper_num = []
 
     pos_pairs = (pos_pid, aid)
-    pos_str_feature.append([])
+    # pos_str_feature.append([])
+    pos_str_feature.append([0] * 10)
     # print(pos_str_feature)
     # exit()
     person_author_ids, person_word_ids, \

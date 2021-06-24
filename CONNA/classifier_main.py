@@ -519,7 +519,7 @@ if __name__ == '__main__':
 		print("str_features", str_features)
 		print("str_features length", len(str_features))
 		sim_vec = np.reshape(sim_vec, [c_s.TEST_SCALE, c_s.TEST_SAMPLE + 1, c_s.FEATURE_SIZE])
-		# str_features = np.reshape(str_features, [c_s.TEST_SCALE, c_s.TEST_SAMPLE + 1, 10])
+		str_features = np.reshape(str_features, [c_s.TEST_SCALE, c_s.TEST_SAMPLE + 1, 10])
 		_, train_top_features, train_top_str, train_top_labels, train_sim_vec = eval_hit(pre_cat, sim_vec, str_features, c_s.TEST_SCALE, c_s.TEST_SAMPLE)
 		# print("reshape:", sim_vec)
 		# print(top_features)
