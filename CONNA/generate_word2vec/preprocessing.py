@@ -176,8 +176,8 @@ if __name__ == '__main__':
     # dump_pub_features_to_file()   # extract features of author name and words from publications
     # cal_feature_idf()                # calculate idf for each author name or word
 
-    emb_model = EmbeddingModel.Instance()   
-    emb_model.train()                # train embeddings for author names and words
+    # emb_model = EmbeddingModel.Instance()   
+    # emb_model.train()                # train embeddings for author names and words
     
-    #5. dump_feature_id_to_file()        
+    dump_feature_id_to_file()        
     

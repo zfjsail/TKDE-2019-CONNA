@@ -407,7 +407,7 @@ if __name__ == '__main__':
 	epoch_num = 100
 
 	test_data = p_d.generate_test_data('train_author_pub_index_profile.json', 'train_author_pub_index_test.json', c_s.TEST_SCALE, c_s.TEST_SAMPLE, c_s.TEST_BATCH_SIZE, 'Train')
-	# print(len(test_data))
+	print("test data length", len(test_data))
 	# test_data_t = p_d.generate_data_batches("name_to_pubs_train.json", "name_to_pubs_test.json", c_s.TEST_SCALE_T, c_s.TEST_SAMPLE_T, c_s.TEST_BATCH_SIZE_T, 'Test')
 	b_t = time()
 	test_data_rank = p_d.generate_test_data('test_author_pub_index_profile.json', 'test_author_pub_index_test.json', c_s.RANK_TEST_SCALE, c_s.RANK_TEST_SAMPLE, c_s.RANK_TEST_BATCH_SIZE, 'rank_test')
@@ -447,8 +447,7 @@ if __name__ == '__main__':
 	classifier_graph = tf.Graph()
 
 	classifier_sess = tf.Session(graph = classifier_graph,config=tf_config)
-
-
+	load_path = "./saved_ranking_model/"
 
 	with rank_graph.as_default():
 		with rank_sess.as_default():
@@ -517,8 +516,10 @@ if __name__ == '__main__':
 		# print(sim_vec)
 		# print(np.array(sim_vec).shape)
 
+		print("str_features", str_features)
+		print("str_features length", len(str_features))
 		sim_vec = np.reshape(sim_vec, [c_s.TEST_SCALE, c_s.TEST_SAMPLE + 1, c_s.FEATURE_SIZE])
-		str_features = np.reshape(str_features, [c_s.TEST_SCALE, c_s.TEST_SAMPLE + 1, 10])
+		# str_features = np.reshape(str_features, [c_s.TEST_SCALE, c_s.TEST_SAMPLE + 1, 10])
 		_, train_top_features, train_top_str, train_top_labels, train_sim_vec = eval_hit(pre_cat, sim_vec, str_features, c_s.TEST_SCALE, c_s.TEST_SAMPLE)
 		# print("reshape:", sim_vec)
 		# print(top_features)
