@@ -693,6 +693,8 @@ if __name__ == '__main__':
             # batch_num = int(batch_num)
             # ins_num = int(ins_num)
 
+            print("ins_num", ins_num, "batch_num", batch_num, len(TE_new_paper_word_ids))
+            print(len(TE_new_paper_word_ids[batch_num]))
             tmp_feature = [TE_new_paper_word_ids[batch_num][int(ins_num * (c_s.TEST_SAMPLE + 1) + c_s.TEST_SAMPLE)]]
             tmp_feature = np.repeat(np.array(tmp_feature), c_s.TEST_SAMPLE, axis = 0).tolist()
             _11_new_paper_word_ids.extend(tmp_feature)
