@@ -689,78 +689,78 @@ if __name__ == '__main__':
             else:
                 ins_num = ins_num - 1
 
-            batch_num = int(batch_num)
-            ins_num = int(ins_num)
+            # batch_num = int(batch_num)
+            # ins_num = int(ins_num)
 
-            tmp_feature = [TE_new_paper_word_ids[batch_num][ins_num * (c_s.TEST_SAMPLE + 1) + c_s.TEST_SAMPLE]]
+            tmp_feature = [TE_new_paper_word_ids[batch_num][int(ins_num * (c_s.TEST_SAMPLE + 1) + c_s.TEST_SAMPLE)]]
             tmp_feature = np.repeat(np.array(tmp_feature), c_s.TEST_SAMPLE, axis = 0).tolist()
             _11_new_paper_word_ids.extend(tmp_feature)
 
-            tmp_feature = [TE_new_paper_word_idfs[batch_num][ins_num * (c_s.TEST_SAMPLE + 1) + c_s.TEST_SAMPLE]]
+            tmp_feature = [TE_new_paper_word_idfs[batch_num][int(ins_num * (c_s.TEST_SAMPLE + 1) + c_s.TEST_SAMPLE)]]
             tmp_feature = np.repeat(np.array(tmp_feature), c_s.TEST_SAMPLE, axis = 0).tolist()
             _11_new_paper_word_idfs.extend(tmp_feature)
 
-            tmp_feature = [TE_new_paper_author_ids[batch_num][ins_num * (c_s.TEST_SAMPLE + 1) + c_s.TEST_SAMPLE]]
+            tmp_feature = [TE_new_paper_author_ids[batch_num][int(ins_num * (c_s.TEST_SAMPLE + 1) + c_s.TEST_SAMPLE)]]
             tmp_feature = np.repeat(np.array(tmp_feature), c_s.TEST_SAMPLE, axis = 0).tolist()
             _11_new_paper_author_ids.extend(tmp_feature)
 
-            tmp_feature = [TE_new_paper_author_idfs[batch_num][ins_num * (c_s.TEST_SAMPLE + 1) + c_s.TEST_SAMPLE]]
+            tmp_feature = [TE_new_paper_author_idfs[batch_num][int(ins_num * (c_s.TEST_SAMPLE + 1) + c_s.TEST_SAMPLE)]]
             tmp_feature = np.repeat(np.array(tmp_feature), c_s.TEST_SAMPLE, axis = 0).tolist()
             _11_new_paper_author_idfs.extend(tmp_feature)
 
 
 
-            tmp_feature = [TE_person_word_ids[batch_num][ins_num * (c_s.TEST_SAMPLE + 1) + c_s.TEST_SAMPLE]]
+            tmp_feature = [TE_person_word_ids[batch_num][int(ins_num * (c_s.TEST_SAMPLE + 1) + c_s.TEST_SAMPLE)]]
             tmp_feature = np.repeat(np.array(tmp_feature), c_s.TEST_SAMPLE, axis = 0).tolist()
             _11_new_pos_person_word_ids.extend(tmp_feature)
 
             # print("TE_person_author_ids")
             # print(TE_person_author_ids[batch_num])
             # print(TE_person_author_ids[batch_num][ins_num * c_s.TEST_SAMPLE:])
-            tmp_feature = [TE_person_author_ids[batch_num][ins_num * (c_s.TEST_SAMPLE + 1) + c_s.TEST_SAMPLE]]
+            tmp_feature = [TE_person_author_ids[batch_num][int(ins_num * (c_s.TEST_SAMPLE + 1) + c_s.TEST_SAMPLE)]]
             tmp_feature = np.repeat(np.array(tmp_feature), c_s.TEST_SAMPLE, axis = 0).tolist()
             _11_new_pos_person_author_ids.extend(tmp_feature)
             # exit()
             # print("re")
             # print(re_new_pos_person_author_ids)
             # exit()
-            tmp_feature = [TE_per_person_word_ids[batch_num][ins_num * (c_s.TEST_SAMPLE + 1) + c_s.TEST_SAMPLE]]
+            tmp_feature = [TE_per_person_word_ids[batch_num][int(ins_num * (c_s.TEST_SAMPLE + 1) + c_s.TEST_SAMPLE)]]
             tmp_feature = np.repeat(np.array(tmp_feature), c_s.TEST_SAMPLE, axis = 0).tolist()
             _11_new_pos_per_person_word_ids.extend(tmp_feature)
 
             # print("TE_person_author_ids")
             # print(TE_per_person_author_ids[batch_num])
-            tmp_feature = [TE_per_person_author_ids[batch_num][ins_num * (c_s.TEST_SAMPLE + 1) + c_s.TEST_SAMPLE]]
+            tmp_feature = [TE_per_person_author_ids[batch_num][int(ins_num * (c_s.TEST_SAMPLE + 1) + c_s.TEST_SAMPLE)]]
             tmp_feature = np.repeat(np.array(tmp_feature), c_s.TEST_SAMPLE, axis = 0).tolist()
             _11_new_pos_per_person_author_ids.extend(tmp_feature)
 
-            tmp_feature = [TE_person_papers[batch_num][ins_num * (c_s.TEST_SAMPLE + 1) + c_s.TEST_SAMPLE]]
+            tmp_feature = [TE_person_papers[batch_num][int(ins_num * (c_s.TEST_SAMPLE + 1) + c_s.TEST_SAMPLE)]]
             tmp_feature = np.repeat(np.array(tmp_feature), c_s.TEST_SAMPLE, axis = 0).tolist()
             _11_new_pos_person_papers.extend(tmp_feature)
 
 
-            tmp_feature = TE_person_word_ids[batch_num][(ins_num * (c_s.TEST_SAMPLE + 1)): ((ins_num) * (c_s.TEST_SAMPLE + 1) + c_s.TEST_SAMPLE)]
+            tmp_feature = TE_person_word_ids[batch_num][int(ins_num * (c_s.TEST_SAMPLE + 1)): int((ins_num) * (c_s.TEST_SAMPLE + 1) + c_s.TEST_SAMPLE)]
             # tmp_feature = np.repeat(np.array(tmp_feature), 8, axis = 0).tolist()
             _11_neg_person_word_ids.extend(tmp_feature)
 
-            tmp_feature = TE_person_author_ids[batch_num][(ins_num * (c_s.TEST_SAMPLE + 1)) : ((ins_num) * (c_s.TEST_SAMPLE + 1) + c_s.TEST_SAMPLE)]
+            tmp_feature = TE_person_author_ids[batch_num][int(ins_num * (c_s.TEST_SAMPLE + 1)) : int((ins_num) * (c_s.TEST_SAMPLE + 1) + c_s.TEST_SAMPLE)]
             # tmp_feature = np.repeat(np.array(tmp_feature), 8, axis = 0).tolist()
             _11_neg_person_author_ids.extend(tmp_feature)
             # exit()
             # print("re")
             # print(re_new_pos_person_author_ids)
             # exit()
-            tmp_feature = TE_per_person_word_ids[batch_num][(ins_num * (c_s.TEST_SAMPLE + 1)) : ((ins_num) * (c_s.TEST_SAMPLE + 1) + c_s.TEST_SAMPLE)]
+            tmp_feature = TE_per_person_word_ids[batch_num][int(ins_num * (c_s.TEST_SAMPLE + 1)) : int((ins_num) * (c_s.TEST_SAMPLE + 1) + c_s.TEST_SAMPLE)]
             # tmp_feature = np.repeat(np.array(tmp_feature), 8, axis = 0).tolist()
             _11_neg_per_person_word_ids.extend(tmp_feature)
 
             # print("TE_person_author_ids")
             # print(TE_per_person_author_ids[batch_num])
-            tmp_feature = TE_per_person_author_ids[batch_num][(ins_num * (c_s.TEST_SAMPLE + 1)): ((ins_num) * (c_s.TEST_SAMPLE + 1) + c_s.TEST_SAMPLE)]
+            tmp_feature = TE_per_person_author_ids[batch_num][int(ins_num * (c_s.TEST_SAMPLE + 1)): int((ins_num) * (c_s.TEST_SAMPLE + 1) + c_s.TEST_SAMPLE)]
             # tmp_feature = np.repeat(np.array(tmp_feature), 8, axis = 0).tolist()
             _11_neg_per_person_author_ids.extend(tmp_feature)
 
-            tmp_feature = TE_person_papers[batch_num][(ins_num * (c_s.TEST_SAMPLE + 1)) : ((ins_num) * (c_s.TEST_SAMPLE + 1) + c_s.TEST_SAMPLE)]
+            tmp_feature = TE_person_papers[batch_num][int(ins_num * (c_s.TEST_SAMPLE + 1)) : int((ins_num) * (c_s.TEST_SAMPLE + 1) + c_s.TEST_SAMPLE)]
             # tmp_feature = np.repeat(np.array(tmp_feature), 8, axis = 0).tolist()
             _11_neg_person_papers.extend(tmp_feature)
 
