@@ -185,7 +185,7 @@ def gen_paper_dict_for_conna():
             mag_venue_id_to_name[cur_v["id"]] = cur_v["NormalizedName"]
 
     for i, pid in enumerate(paper_dict):
-        if i % 1000 == 0:
+        if i % 10000 == 0:
             print("paper", i)
         cur_paper_dict_old = paper_dict[pid]
         cur_paper_dict = {"id": pid}
