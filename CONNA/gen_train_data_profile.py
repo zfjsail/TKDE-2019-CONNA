@@ -373,8 +373,10 @@ def get_data_batches(paper_list, neg_sample):
         pid_order = ins[0]
         if pid_order not in pub_feature_dict:
             continue
-        res.append(_gen_pos_and_neg_pair(ins))
-        if (len(res) % 1000 == 0):
+        r = _gen_pos_and_neg_pair(ins)
+        if r is not None:
+            res.append(r)
+        if len(res) % 1000 == 0:
             print('now process: ', len(res))
 
     neg_person_author_ids, neg_person_word_ids, neg_per_person_author_ids, neg_per_person_word_ids, neg_author_len, neg_word_len, neg_author_whole, neg_word_whole, neg_person_papers = [], [], [], [], [], [], [], [], []
@@ -744,6 +746,9 @@ def _gen_pos_and_neg_pair(index):
     per_person_author_ids, per_person_word_ids, \
     author_len, word_len, \
     whole_author_len, whole_word_len = get_paper_pos_instances(pos_person_pids, pos_pid)
+
+    if len(author_len) == 0:
+        return None
 
     pos_person_author_id_list.append(person_author_ids)
     pos_person_word_id_list.append(person_word_ids)
