@@ -633,6 +633,7 @@ if __name__ == '__main__':
 
     # Save checkpoints
     save_path = './saved_ranking_model_new/'
+    os.makedirs(save_path, exist_ok=True)
     print("begin load training and test data ......")
 
     train_data = gen_train_data_profile.generate_train_data("train_author_pub_index_profile.json",
