@@ -122,7 +122,7 @@ def dump_emb_array(emb_model, output_name):
     res = multithread_utils.processed_by_multi_thread(get_feature_index, range(len(_emb_model.wv.vocab)))
     sorted_embeddings = sorted(res, key=lambda x: x[0])
     word_embeddings = list(list(zip(*sorted_embeddings))[1])
-    data_utils.dump_data(np.array(word_embeddings), 'Essential_Embeddings/emb/', output_name)
+    data_utils.dump_data(np.array(word_embeddings), 'Essential_Embeddings_new/emb/', output_name)
 
 
 def get_feature_ids_idfs_for_one_pub(features, emb_model, idfs):
@@ -152,9 +152,9 @@ def dump_feature_id_to_file():
     dump_emb_array(author_emb_model, author_emb_file)
     dump_emb_array(word_emb_model, word_emb_file)
 
-    features = data_utils.load_data('Essential_Embeddings/', "pub.features")
-    author_idfs = data_utils.load_data('Essential_Embeddings/global/', 'author_feature_idf.pkl')
-    word_idfs = data_utils.load_data('Essential_Embeddings/global/', 'word_feature_idf.pkl')
+    features = data_utils.load_data('Essential_Embeddings_new/', "pub.features")
+    author_idfs = data_utils.load_data('Essential_Embeddings_new/global/', 'author_feature_idf.pkl')
+    word_idfs = data_utils.load_data('Essential_Embeddings_new/global/', 'word_feature_idf.pkl')
     index = 0
     feature_dict = {}
     for pub_index in range(len(features)):
@@ -172,7 +172,7 @@ def dump_feature_id_to_file():
 
             if author_id_list is not None or word_id_list is not None:
                 feature_dict[aid] = (author_id_list, author_idf_list, word_id_list, word_idf_list)
-    data_utils.dump_data(feature_dict, 'Essential_Embeddings/emb/', "pub_feature.ids")
+    data_utils.dump_data(feature_dict, 'Essential_Embeddings_new/emb/', "pub_feature.ids")
 
 
 def gen_paper_dict_for_conna():
@@ -223,7 +223,7 @@ if __name__ == '__main__':
     # dump_pub_features_to_file()   # extract features of author name and words from publications
     # cal_feature_idf()                # calculate idf for each author name or word
 
-    emb_model = EmbeddingModel.Instance()
-    emb_model.train()                # train embeddings for author names and words
+    # emb_model = EmbeddingModel.Instance()
+    # emb_model.train()                # train embeddings for author names and words
 
-    # dump_feature_id_to_file()
+    dump_feature_id_to_file()

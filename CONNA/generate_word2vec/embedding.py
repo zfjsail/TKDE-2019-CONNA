@@ -51,11 +51,13 @@ class EmbeddingModel:
         self.word_model.save(join(out_dir, 'word.emb'))
 
     def load_author_name_emb(self):
-        self.author_model = Word2Vec.load(join('Essential_Embeddings/emb/', 'author_name.emb'))
+        # self.author_model = Word2Vec.load(join('Essential_Embeddings/emb/', 'author_name.emb'))
+        self.author_model = Word2Vec.load(join('Essential_Embeddings_new/emb/', 'author_name.emb'))
         return self.author_model
 
     def load_word_name_emb(self):
-        self.word_model = Word2Vec.load(join('Essential_Embeddings/emb/', 'word.emb'))
+        # self.word_model = Word2Vec.load(join('Essential_Embeddings/emb/', 'word.emb'))
+        self.word_model = Word2Vec.load(join('Essential_Embeddings_new/emb/', 'word.emb'))
         return self.word_model
 
 
