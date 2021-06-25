@@ -1,6 +1,7 @@
 from os.path import join
 import os
 import sys
+
 sys.path.append("..")
 import codecs
 import math
@@ -17,12 +18,12 @@ from nltk.corpus import stopwords
 
 start_time = datetime.now()
 
-
 _pubs_dict = None
+
 
 def get_pub_feature(i):
     if i % 1000 == 0:
-        print("The %dth paper"%i)
+        print("The %dth paper" % i)
     pid = list(_pubs_dict)[i]
     paper = _pubs_dict[pid]
     if "title" not in paper or "authors" not in paper:
@@ -81,14 +82,14 @@ def cal_feature_idf():
             if index % 100000 == 0:
                 print(index, aid)
             index += 1
-            
+
             for af in author_features:
                 author_cnt += 1
                 author_counter[af] += 1
 
             for wf in word_features:
-                word_cnt +=1
-                word_counter[wf] +=1        
+                word_cnt += 1
+                word_counter[wf] += 1
 
     author_idf = {}
     for k in author_counter:
@@ -102,7 +103,9 @@ def cal_feature_idf():
     data_utils.dump_data(dict(word_idf), feature_dir, "word_feature_idf.pkl")
     print("None count: ", none_count)
 
+
 _emb_model = None
+
 
 def get_feature_index(i):
     word = _emb_model.wv.index2word[i]
@@ -110,15 +113,15 @@ def get_feature_index(i):
     return (i, embedding)
 
 
-
 def dump_emb_array(emb_model, output_name):
-	global _emb_model
-	_emb_model = emb_model
-	# transform the feature embeddings from embedding to (id, embedding)
-	res = multithread_utils.processed_by_multi_thread(get_feature_index, range(len(_emb_model.wv.vocab)))
-	sorted_embeddings = sorted(res, key=lambda x:x[0])
-	word_embeddings = list(list(zip(*sorted_embeddings))[1])
-	data_utils.dump_data(np.array(word_embeddings), 'Essential_Embeddings/emb/', output_name)
+    global _emb_model
+    _emb_model = emb_model
+    # transform the feature embeddings from embedding to (id, embedding)
+    res = multithread_utils.processed_by_multi_thread(get_feature_index, range(len(_emb_model.wv.vocab)))
+    sorted_embeddings = sorted(res, key=lambda x: x[0])
+    word_embeddings = list(list(zip(*sorted_embeddings))[1])
+    data_utils.dump_data(np.array(word_embeddings), 'Essential_Embeddings/emb/', output_name)
+
 
 def get_feature_ids_idfs_for_one_pub(features, emb_model, idfs):
     id_list = []
@@ -153,31 +156,30 @@ def dump_feature_id_to_file():
     index = 0
     feature_dict = {}
     for pub_index in range(len(features)):
-    	pub_features = features[pub_index]
-    	if (pub_features == None):
+        pub_features = features[pub_index]
+        if (pub_features == None):
             continue
-    	for author_index in range(len(pub_features)):
-    		aid, author_features, word_features = pub_features[author_index]
-    		if index % 100000 == 0:
-    			print(index, author_features, word_features)
-    		index += 1
-    		author_id_list, author_idf_list = get_feature_ids_idfs_for_one_pub(author_features, author_emb_model, author_idfs)
-    		word_id_list, word_idf_list = get_feature_ids_idfs_for_one_pub(word_features, word_emb_model, word_idfs)
+        for author_index in range(len(pub_features)):
+            aid, author_features, word_features = pub_features[author_index]
+            if index % 100000 == 0:
+                print(index, author_features, word_features)
+            index += 1
+            author_id_list, author_idf_list = get_feature_ids_idfs_for_one_pub(author_features, author_emb_model,
+                                                                               author_idfs)
+            word_id_list, word_idf_list = get_feature_ids_idfs_for_one_pub(word_features, word_emb_model, word_idfs)
 
-    		if author_id_list is not None or word_id_list is not None:
-    			feature_dict[aid] = (author_id_list, author_idf_list, word_id_list, word_idf_list)
+            if author_id_list is not None or word_id_list is not None:
+                feature_dict[aid] = (author_id_list, author_idf_list, word_id_list, word_idf_list)
     data_utils.dump_data(feature_dict, 'Essential_Embeddings/emb/', "pub_feature.ids")
 
 
 if __name__ == '__main__':
     # Processing raw data as follows to generate essential word embeddings.
 
-
     # dump_pub_features_to_file()   # extract features of author name and words from publications
     # cal_feature_idf()                # calculate idf for each author name or word
 
     # emb_model = EmbeddingModel.Instance()   
     # emb_model.train()                # train embeddings for author names and words
-    
-    dump_feature_id_to_file()        
-    
+
+    dump_feature_id_to_file()
