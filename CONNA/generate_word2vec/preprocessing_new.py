@@ -284,12 +284,12 @@ if __name__ == '__main__':
     # Processing raw data as follows to generate essential word embeddings.
 
     # gen_paper_dict_for_conna()
-    # dump_pub_features_to_file()   # extract features of author name and words from publications
+    dump_pub_features_to_file()   # extract features of author name and words from publications
     # cal_feature_idf()                # calculate idf for each author name or word
 
     # emb_model = EmbeddingModel.Instance()
     # emb_model.train()                # train embeddings for author names and words
 
-    # dump_feature_id_to_file()
+    dump_feature_id_to_file()
     # gen_train_name_aid_to_pids()
-    gen_test_name_aid_to_pids()
+    # gen_test_name_aid_to_pids()
