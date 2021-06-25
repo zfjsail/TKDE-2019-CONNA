@@ -250,6 +250,36 @@ def gen_train_name_aid_to_pids():
     data_utils.dump_json(name_aid_to_pids_new, "./na-check-new", "train_author_pub_index_test.json")
 
 
+def gen_test_name_aid_to_pids():
+    name_aid_to_pids_new = data_utils.load_json("./na-check-new", "train_author_pub_index_profile.json")
+    eval_pairs = data_utils.load_json("/home/zfj/research-data/na-checking/aminer-new1/", "eval_na_checking_pairs_test.json")
+    paper_dict = data_utils.load_json("./na-check-new", "paper_dict_used_mag_for_conna.json")
+    name_aid_to_pids_new_test = dd(dict)
+
+    for i, pair in enumerate(eval_pairs):
+        if i % 10000 == 0:
+            print("pair", i)
+        aid = pair["aid"]
+        name = pair["name"]
+        pid = pair["pid"]
+        pid = str(pid)
+
+        if pid not in paper_dict:
+            continue
+        for a_i, a in enumerate(paper_dict[pid].get("authors", [])):
+            cur_a_name = a["name"]
+            cur_a_name = string_utils.clean_name(cur_a_name)
+            if cur_a_name == name:
+                pid_order = str(pid) + "-" + str(a_i)
+                if name_aid_to_pids_new_test.get(name, {}).get(aid, []):
+                    name_aid_to_pids_new_test[name][aid].append(pid_order)
+                else:
+                    name_aid_to_pids_new_test[name][aid] = [pid_order]
+
+    data_utils.dump_data(name_aid_to_pids_new_test, "./na-check-new", "test_author_pub_index_test.json")
+    data_utils.dump_data(name_aid_to_pids_new, "./na-check-new", "test_author_pub_index_profile.json")
+
+
 if __name__ == '__main__':
     # Processing raw data as follows to generate essential word embeddings.
 
@@ -261,4 +291,5 @@ if __name__ == '__main__':
     # emb_model.train()                # train embeddings for author names and words
 
     # dump_feature_id_to_file()
-    gen_train_name_aid_to_pids()
+    # gen_train_name_aid_to_pids()
+    gen_test_name_aid_to_pids()
