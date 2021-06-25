@@ -12,6 +12,7 @@ from datetime import datetime
 # from utils.cache import LMDBClient
 from utils import data_utils
 from utils import feature_utils
+from utils import string_utils
 from utils import settings
 from utils import multithread_utils
 import numpy as np
@@ -216,6 +217,39 @@ def gen_paper_dict_for_conna():
     data_utils.dump_json(paper_dict_new, out_dir, "paper_dict_used_mag_for_conna.json")
 
 
+def gen_train_name_aid_to_pids():
+    name_aid_to_pids = data_utils.load_json("/home/zfj/research-data/na-checking/aminer-new1/", "aminer_name_aid_to_mag_pids_merge.json")
+    name_aid_to_pids_new = dd(dict)
+    paper_dict = data_utils.load_json("./na-check-new", "paper_dict_used_mag_for_conna.json")
+
+    process_paper_cnt = 0
+    for i, name in enumerate(name_aid_to_pids):
+        print("name", i, name)
+        cur_name_dict = name_aid_to_pids[name]
+        for j, aid in enumerate(cur_name_dict):
+            cur_pids = cur_name_dict[aid]
+            pids_new = []
+            for pid in cur_pids:
+                if process_paper_cnt % 10000 == 0:
+                    print("process paper cnt", process_paper_cnt)
+                pid = str(pid)
+                if pid not in paper_dict:
+                    continue
+                for a_i, a in enumerate(paper_dict[pid].get("authors", [])):
+                    cur_a_name = a["name"]
+                    cur_a_name = string_utils.clean_name(cur_a_name)
+                    if cur_a_name == name:
+                        pid_order = str(pid) + "-" + str(a_i)
+                        pids_new.append(pid_order)
+                        break
+                process_paper_cnt += 1
+            if len(pids_new) >= 5:
+                name_aid_to_pids_new[name][aid] = pids_new
+
+    data_utils.dump_json(name_aid_to_pids_new, "./na-check-new", "train_author_pub_index_profile.json")
+    data_utils.dump_json(name_aid_to_pids_new, "./na-check-new", "train_author_pub_index_test.json")
+
+
 if __name__ == '__main__':
     # Processing raw data as follows to generate essential word embeddings.
 
@@ -226,4 +260,5 @@ if __name__ == '__main__':
     # emb_model = EmbeddingModel.Instance()
     # emb_model.train()                # train embeddings for author names and words
 
-    dump_feature_id_to_file()
+    # dump_feature_id_to_file()
+    gen_train_name_aid_to_pids()

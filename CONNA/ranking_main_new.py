@@ -632,7 +632,7 @@ def print_variable(sess):
 if __name__ == '__main__':
 
     # Save checkpoints
-    save_path = './saved_ranking_model/'
+    save_path = './saved_ranking_model_new/'
     print("begin load training and test data ......")
 
     train_data = gen_train_data_profile.generate_train_data("train_author_pub_index_profile.json",
@@ -715,7 +715,7 @@ if __name__ == '__main__':
                 # print("test")
                 # print_variable(sess)
                 test_begin = time()
-                # predictions, test_loss = model.predict(TE_person_word_id_list, TE_paper_word_id_list, TE_person_word_idf_list, 
+                # predictions, test_loss = model.predict(TE_person_word_id_list, TE_paper_word_id_list, TE_person_word_idf_list,
                 #     TE_person_author_id_list, TE_paper_author_id_list, TE_person_author_idf_list, TE_labels)
 
                 predictions = model.predict(
