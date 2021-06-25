@@ -636,6 +636,8 @@ def get_paper_neg_instances(pid_list):
 
     for pid in pid_list:
         # author_id_list, author_idf_list, word_id_list, word_idf_list, _, _, _,_ ,_ ,_ = pub_feature_dict[pid]
+        if pid not in pub_feature_dict:
+            continue
         author_id_list, author_idf_list, word_id_list, word_idf_list = pub_feature_dict[pid]
         person_author_ids += author_id_list
         person_word_ids += word_id_list
