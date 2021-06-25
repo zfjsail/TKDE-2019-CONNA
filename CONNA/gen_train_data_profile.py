@@ -151,6 +151,8 @@ def generate_test_data(train_data_file, test_data_file, data_size, smaple_num):
     print('#name = %d' % len(name_valid))
 
     for name in name_valid:
+        if name not in test_name2aidpid:
+            continue
         aid2pid = test_name2aidpid[name]
         for aid in aid2pid:
             for pid in aid2pid[aid]:
