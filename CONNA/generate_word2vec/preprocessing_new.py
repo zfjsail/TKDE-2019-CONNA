@@ -63,8 +63,8 @@ def cal_feature_idf():
     """
     calculate word IDF (Inverse document frequency) using publication data
     """
-    features = data_utils.load_data('Essential_Embeddings/', "pub.features")
-    feature_dir = join('Essential_Embeddings/', 'global')
+    features = data_utils.load_data('Essential_Embeddings_new/', "pub.features")
+    feature_dir = join('Essential_Embeddings_new/', 'global')
     os.makedirs(feature_dir, exist_ok=True)
     index = 0
     author_counter = dd(int)
@@ -220,8 +220,8 @@ if __name__ == '__main__':
     # Processing raw data as follows to generate essential word embeddings.
 
     # gen_paper_dict_for_conna()
-    dump_pub_features_to_file()   # extract features of author name and words from publications
-    # cal_feature_idf()                # calculate idf for each author name or word
+    # dump_pub_features_to_file()   # extract features of author name and words from publications
+    cal_feature_idf()                # calculate idf for each author name or word
 
     # emb_model = EmbeddingModel.Instance()
     # emb_model.train()                # train embeddings for author names and words
