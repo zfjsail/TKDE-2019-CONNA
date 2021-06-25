@@ -50,9 +50,10 @@ def dump_pub_features_to_file():
     global _pubs_dict
 
     # Load publication features
-    _pubs_dict = data_utils.load_json('./WhoIsWho_data', 'conna_pub_dict.json')
+    # _pubs_dict = data_utils.load_json('./WhoIsWho_data', 'conna_pub_dict.json')
+    _pubs_dict = data_utils.load_json('./na-check-new', 'paper_dict_used_mag_for_conna.json')
     res = multithread_utils.processed_by_multi_thread(get_pub_feature, range(len(_pubs_dict)))
-    data_utils.dump_data(res, "Essential_Embeddings/", "pub.features")
+    data_utils.dump_data(res, "Essential_Embeddings_new/", "pub.features")
     # _pubs_dict = data_utils.load_json(settings.GLOBAL_DATA_DIR, 'pubs_raw.json')
     # res = multithread_utils.processed_by_multi_thread(get_pub_feature, range(len(_pubs_dict)))
     # data_utils.dump_data(res, settings.GLOBAL_DATA_DIR, "pub.features")
@@ -218,8 +219,8 @@ def gen_paper_dict_for_conna():
 if __name__ == '__main__':
     # Processing raw data as follows to generate essential word embeddings.
 
-    gen_paper_dict_for_conna()
-    # dump_pub_features_to_file()   # extract features of author name and words from publications
+    # gen_paper_dict_for_conna()
+    dump_pub_features_to_file()   # extract features of author name and words from publications
     # cal_feature_idf()                # calculate idf for each author name or word
 
     # emb_model = EmbeddingModel.Instance()

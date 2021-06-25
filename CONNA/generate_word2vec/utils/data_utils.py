@@ -1,5 +1,6 @@
 import codecs
 import json
+import os
 from os.path import join
 import pickle
 import os
@@ -21,6 +22,7 @@ def dump_json_text(obj, wfpath, wfname, indent=None):
 
 
 def dump_data(obj, wfpath, wfname):
+    os.makedirs(wfpath, exist_ok=True)
     with open(os.path.join(wfpath, wfname), 'wb') as wf:
         pickle.dump(obj, wf)
 
