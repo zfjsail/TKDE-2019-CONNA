@@ -259,7 +259,7 @@ def gen_test_name_aid_to_pids():
     for i, pair in enumerate(eval_pairs):
         if i % 10000 == 0:
             print("pair", i)
-        aid = pair["aid"]
+        aid = pair["aid1"]
         name = pair["name"]
         pid = pair["pid"]
         pid = str(pid)
@@ -276,8 +276,8 @@ def gen_test_name_aid_to_pids():
                 else:
                     name_aid_to_pids_new_test[name][aid] = [pid_order]
 
-    data_utils.dump_data(name_aid_to_pids_new_test, "./na-check-new", "test_author_pub_index_test.json")
-    data_utils.dump_data(name_aid_to_pids_new, "./na-check-new", "test_author_pub_index_profile.json")
+    data_utils.dump_json(name_aid_to_pids_new_test, "./na-check-new", "test_author_pub_index_test.json")
+    data_utils.dump_json(name_aid_to_pids_new, "./na-check-new", "test_author_pub_index_profile.json")
 
 
 if __name__ == '__main__':
