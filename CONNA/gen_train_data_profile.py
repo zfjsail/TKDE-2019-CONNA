@@ -204,6 +204,8 @@ def get_test_data_batches(paper_list, neg_sample):
     res = []
     for ins in valid_index:
         pid_order = ins[0]
+        if pid_order not in pub_feature_dict:
+            continue
         res.append(_test_gen_pos_and_neg_pair(ins))
         if (len(res) % 1000 == 0):
             print('now process: ', len(res))
