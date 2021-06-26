@@ -185,6 +185,8 @@ def get_valid_index(paper_list, neg_sample):
             exit()
 
         copy_sample_list = copy.deepcopy(sample_list)
+        print("aid", aid, "name", name)
+        print("copy_sample_list", copy_sample_list)
         copy_sample_list.remove(aid)
         random.shuffle(copy_sample_list)
         assert len(copy_sample_list) == (len(sample_list) - 1)
