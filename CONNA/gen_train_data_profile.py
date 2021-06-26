@@ -207,7 +207,10 @@ def get_test_data_batches(paper_list, neg_sample):
         pid_order = ins[0]
         if pid_order not in pub_feature_dict:
             continue
-        res.append(_test_gen_pos_and_neg_pair(ins))
+        r = _test_gen_pos_and_neg_pair(ins)
+        if r is None:
+            continue
+        res.append(r)
         if (len(res) % 1000 == 0):
             print('now process: ', len(res))
 
@@ -826,6 +829,8 @@ def _test_gen_pos_and_neg_pair(index):
     neg_idx = index[1]
     # pos_pid = pid_list[i]
     (name, aid) = pid_dict[pos_pid]
+    if aid not in name2aidpid.get(name, {}):
+        return None
     pos_person_pids = name2aidpid[name][aid]
 
     if (len(neg_idx) != settings.TEST_SAMPLE):
