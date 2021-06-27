@@ -22,9 +22,9 @@ def eval_hit(predictions):
     top_k = [1, 3, 5]
     mrr = 0
     top_k_metric = np.array([0 for k in top_k])
-    if (len(predictions)!= settings.TEST_SCALE * (settings.TEST_SAMPLE + 1)):
-        print("predictions: {} don't match {}".format(len(predictions), settings.TEST_SCALE * (settings.TEST_SAMPLE + 1)))
-        exit()
+    # if (len(predictions)!= settings.TEST_SCALE * (settings.TEST_SAMPLE + 1)):
+    #     print("predictions: {} don't match {}".format(len(predictions), settings.TEST_SCALE * (settings.TEST_SAMPLE + 1)))
+    #     exit()
     per_d = settings.TEST_SCALE * (settings.TEST_SAMPLE + 1)
 
     predictions = np.array(predictions).reshape((settings.TEST_SCALE, settings.TEST_SAMPLE + 1))
