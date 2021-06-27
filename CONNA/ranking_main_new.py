@@ -6,7 +6,7 @@ import os
 
 os.environ['KMP_DUPLICATE_LIB_OK'] = 'True'
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
-os.environ['CUDA_VISIBLE_DEVICES'] = ''
+# os.environ['CUDA_VISIBLE_DEVICES'] = '0'
 import multiprocessing as mp
 import numpy as np
 import tensorflow as tf
@@ -711,6 +711,7 @@ if __name__ == '__main__':
             train_time = time() - train_begin
             print("Epoch %d: train_loss = %.4f [%.1fs]" % (epoch_count, avg_train_loss, train_time))
             # print(avg_l2_loss)
+            # continue
 
             if epoch_count % settings.VERBOSE == 0:
                 # print("test")
