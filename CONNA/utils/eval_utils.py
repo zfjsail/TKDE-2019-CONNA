@@ -26,7 +26,7 @@ def eval_hit(predictions):
     #     exit()
     per_d = settings.TEST_SCALE * (settings.TEST_SAMPLE + 1)
 
-    predictions = np.array(predictions).reshape((settings.TEST_SCALE, settings.TEST_SAMPLE + 1))
+    predictions = np.array(predictions).reshape((-1, settings.TEST_SAMPLE + 1))
 
     for i in range(len(predictions)):
         rank = np.argsort(-predictions[i, :])

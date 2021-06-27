@@ -6,7 +6,7 @@ import os
 
 os.environ['KMP_DUPLICATE_LIB_OK'] = 'True'
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
-os.environ['CUDA_VISIBLE_DEVICES'] = '0'
+os.environ['CUDA_VISIBLE_DEVICES'] = ''
 import multiprocessing as mp
 import numpy as np
 import tensorflow as tf
